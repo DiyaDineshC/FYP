@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1096509387514",
+    "project_id": "fypro-417ee",
+    "storage_bucket": "fypro-417ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096509387514:android:31967904e8e21134e78f43",
+        "android_client_info": {
+          "package_name": "com.example.helmet_license"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxDP6D8f3fEvBVj7X1kUz1dObuWYRabCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
