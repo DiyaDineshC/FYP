@@ -1,8 +1,11 @@
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:helmet_license/HomeScreen/imageUploadScreen.dart';
 
 
-import 'package:helmet_license/imageUploadScreen.dart';
+
+
 
 // import 'package:helmet_license/storage_service.dart'; 
 // import 'package:helmet_license/firestore_Service.dart';
@@ -42,13 +45,24 @@ class HomeScreen extends StatelessWidget {
               iconSize: featureCardIconSize,
               title: 'Real-time Detection',
               description: 'Monitor helmets and license plates in real-time.',
-              onTap: () {
+              onTap: () async {
+                final cameras = await availableCameras();
                 Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ImageUploadScreen(),
-                        ),
-                      );
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CameraScreen(
+                      cameras: cameras,
+                      modelPath: 'assets/best_float32.tflite',
+                      onRecognitions: (recognitions, height, width) {
+                        // Handle recognitions here
+                        for (var recognition in recognitions) {
+                          print("Label: ${recognition['label']}, Confidence: ${recognition['confidence']}");
+                          print("Bounding Box: ${recognition['rect']}");
+                        }
+                      }
+                    ),
+                  ),
+                );
               },
             ),
             FeatureCard(
@@ -117,6 +131,58 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+class CameraScreen extends StatefulWidget {
+  final List<CameraDescription> cameras;
+  final String modelPath;
+  final Function(List<dynamic> recognitions, int height, int width) onRecognitions;
+
+  const CameraScreen({
+    Key? key,
+    required this.cameras,
+    required this.modelPath,
+    required this.onRecognitions,
+  }) : super(key: key);
+
+  @override
+  State<CameraScreen> createState() => _CameraScreenState();
+}
+
+class _CameraScreenState extends State<CameraScreen> {
+  late CameraController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeCamera();
+  }
+
+  Future<void> _initializeCamera() async {
+    _controller = CameraController(widget.cameras.first, ResolutionPreset.high);
+    await _controller.initialize();
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_controller.value.isInitialized) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Real-time Detection"),
+      ),
+      body: CameraPreview(_controller),
+    );
+  }
+}
+
 
 class FeatureCard extends StatelessWidget {
   final IconData icon;
