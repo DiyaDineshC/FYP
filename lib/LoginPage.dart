@@ -2,8 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helmet_license/DetectionNew.dart';
+
 import 'package:helmet_license/VerificationPage.dart';
+import 'package:helmet_license/home_screen.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'dart:io';
@@ -57,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
         } else {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HelmetLicensePlateDetection()),
+            MaterialPageRoute(builder: (context) => HomeScreen()),
           );
         }
       }
