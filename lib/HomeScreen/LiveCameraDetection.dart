@@ -25,8 +25,8 @@ class _LiveDetectionScreenState extends State<LiveDetectionScreen> {
   Future<void> _initializeCamera() async {
     cameras = await availableCameras();
     _controller = CameraController(
-      cameras[0], // Select the first camera (front/back)
-      ResolutionPreset.high,
+      cameras[0], 
+      ResolutionPreset.medium,
     );
     await _controller.initialize();
     setState(() {});

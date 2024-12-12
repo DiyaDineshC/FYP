@@ -3,13 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:helmet_license/HomeScreen/home_screen.dart';
 
-
-
-
-
-
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();  // Ensures the app is initialized
   await Firebase.initializeApp();  // Initialize Firebase
@@ -124,4 +117,34 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:helmet_license/MySplashScreen.dart';
+
+// import 'package:camera/camera.dart';
+
+// late List<CameraDescription> cameras;
+
+// Future<void> main() async {
+
+//   WidgetsFlutterBinding.ensureInitialized();
+//   cameras = await availableCameras();
+//   runApp(const MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Yolo Object Detection and License Plate Recognition',
+//       home: MySplashPage(),
+//     );
+//   }
+// }
+
 

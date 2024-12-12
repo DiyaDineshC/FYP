@@ -1,19 +1,12 @@
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:helmet_license/HomeScreen/cameralive.dart';
 import 'package:helmet_license/HomeScreen/imageUploadScreen.dart';
 
 
-
-
-
-// import 'package:helmet_license/storage_service.dart'; 
-// import 'package:helmet_license/firestore_Service.dart';
-
 class HomeScreen extends StatelessWidget {
 
-  // final StorageService _storageService = StorageService();
-  // final FirestoreService _firestoreService = FirestoreService();
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,24 +39,14 @@ class HomeScreen extends StatelessWidget {
               title: 'Real-time Detection',
               description: 'Monitor helmets and license plates in real-time.',
               onTap: () async {
-                final cameras = await availableCameras();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CameraScreen(
-                      cameras: cameras,
-                      modelPath: 'assets/best_float32.tflite',
-                      onRecognitions: (recognitions, height, width) {
-                        // Handle recognitions here
-                        for (var recognition in recognitions) {
-                          print("Label: ${recognition['label']}, Confidence: ${recognition['confidence']}");
-                          print("Bounding Box: ${recognition['rect']}");
-                        }
-                      }
-                    ),
-                  ),
-                );
-              },
+                
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CameraLive(),
+                        ),
+                      );
+              } 
             ),
             FeatureCard(
               icon: Icons.notifications,
